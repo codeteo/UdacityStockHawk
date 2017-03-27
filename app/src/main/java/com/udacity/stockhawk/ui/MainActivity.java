@@ -1,5 +1,6 @@
 package com.udacity.stockhawk.ui;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -31,21 +32,26 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         SwipeRefreshLayout.OnRefreshListener,
         StockAdapter.StockAdapterOnClickHandler {
 
+    private static final String INTENT_SYMBOL = "symbol";
+    private static final String INTENT_HISTORY = "history";
     private static final int STOCK_LOADER = 0;
+
     @SuppressWarnings("WeakerAccess")
-    @BindView(R.id.recycler_view)
-    RecyclerView stockRecyclerView;
+    @BindView(R.id.recycler_view) RecyclerView stockRecyclerView;
     @SuppressWarnings("WeakerAccess")
-    @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
     @SuppressWarnings("WeakerAccess")
-    @BindView(R.id.error)
-    TextView error;
+    @BindView(R.id.error) TextView error;
+
     private StockAdapter adapter;
 
     @Override
-    public void onClick(String symbol) {
+    public void onClick(String symbol, String history) {
         Timber.d("Symbol clicked: %s", symbol);
+        Intent intent = new Intent(this, DetailsActivity.class);
+        intent.putExtra(INTENT_SYMBOL, symbol);
+        intent.putExtra(INTENT_HISTORY, history);
+        startActivity(intent);
     }
 
     @Override
