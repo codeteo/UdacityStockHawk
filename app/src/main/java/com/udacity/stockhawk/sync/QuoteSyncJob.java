@@ -11,6 +11,8 @@ import android.net.NetworkInfo;
 
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
+import com.udacity.stockhawk.data.bus.BusProvider;
+import com.udacity.stockhawk.data.bus.events.UnknownStockSymbolEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -109,7 +111,7 @@ public final class QuoteSyncJob {
 
                 } else {
                     Timber.i("ERROR : NPE");
-                    // TODO: 4/8/17 show Error
+                    BusProvider.getInstance().post(new UnknownStockSymbolEvent());
                 }
 
             }

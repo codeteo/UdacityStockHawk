@@ -34,6 +34,7 @@
 
     <!-- Main screen start-->
     <string name="activity_main_fab_content_description">Add Stock</string>
+    <string name="activity_main_snackbar_error_stock_symbol">Error with stock symbol</string>
     <!-- Main screen end-->
 
 </resources>

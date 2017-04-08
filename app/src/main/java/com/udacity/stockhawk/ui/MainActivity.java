@@ -3,6 +3,8 @@ package com.udacity.stockhawk.ui;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -16,9 +18,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.otto.Subscribe;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
+import com.udacity.stockhawk.data.bus.events.UnknownStockSymbolEvent;
 import com.udacity.stockhawk.sync.QuoteSyncJob;
 
 import butterknife.BindView;
@@ -41,6 +45,8 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
     @BindView(R.id.swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.error) TextView error;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.cl_main_container) CoordinatorLayout clMainContainer;
 
     private StockAdapter adapter;
 
@@ -183,4 +189,12 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Subscribe
+    public void onUnknownStockSymbolEventReceived(UnknownStockSymbolEvent event) {
+        Snackbar.make(clMainContainer,
+                        getString(R.string.activity_main_snackbar_error_stock_symbol), Snackbar.LENGTH_LONG)
+                .show();
+    }
+
 }
