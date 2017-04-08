@@ -1,4 +1,6 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="item_quote_padding">16dp</dimen>
+    <dimen name="dialog_stock_default_margin">4dp</dimen>
+    <dimen name="dialog_stock_large_margin">16dp</dimen>
 </resources>
