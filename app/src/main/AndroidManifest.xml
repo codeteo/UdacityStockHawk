@@ -42,18 +42,17 @@
         <!-- Stock Widget -->
         <receiver
             android:name=".widget.StockWidgetProvider"
-            android:label="StockWidget"
-            android:enabled="false" >
+            android:label="StockWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.example.android.sunshine.app.ACTION_DATA_UPDATED" />
+                <action android:name="com.udacity.stockhawk.ACTION_DATA_UPDATED" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/app_widget_provider_info" />
         </receiver>
         <service
             android:name=".widget.StockWidgetRemoteViewsService"
-            android:enabled="false" android:exported="false"
+            android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
     </application>
